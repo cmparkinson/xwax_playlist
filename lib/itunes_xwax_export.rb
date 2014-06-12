@@ -1,5 +1,10 @@
-require "itunes_xwax_export/version"
+$:.unshift(File.expand_path(__dir__))
 
-module ItunesXwaxExport
-  # Your code goes here...
+require 'itunes_xwax_export/playlist'
+require 'itunes_xwax_export/track'
+require 'itunes_xwax_export/parser'
+require 'itunes_xwax_export/command_line_parser'
+
+module XwaxExport
+  VERSION = '0.1.0'
 end

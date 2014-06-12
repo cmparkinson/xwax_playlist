@@ -1,14 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'itunes_xwax_export/version'
+require 'itunes_xwax_export'
 
 Gem::Specification.new do |spec|
   spec.name          = 'itunes_xwax_export'
-  spec.version       = ItunesXwaxExport::VERSION
+  spec.version       = XwaxExport::VERSION
   spec.authors       = ['Christian Parkinson']
   spec.email         = ['chris@parkie.ca']
-  spec.summary       = %q{A small utility to parse the iTunes Library XML file are export xwax compatible playlists.}
+  spec.summary       = %q{A small utility to parse the iTunes Library XML file and export xwax compatible playlists.}
   spec.homepage      = ''
   spec.license       = 'MIT'
 
@@ -21,5 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec', '~> 3.0'
 
-  spec.add_dependency 'nokogiri', '~> 1.6.2'
+  spec.add_dependency 'plist', '~> 3.1'
 end
