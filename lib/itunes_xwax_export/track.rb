@@ -40,17 +40,19 @@ module XwaxExport
 
       src = Addressable::URI.unescape(URI(@location).path)
       dst_filename = pattern && evaluate_pattern(pattern) || File.basename(src)
+      dst_path = File.join(dst_dir, dst_filename)
 
-      FileUtils.cp(src, File.join(dst_dir, dst_filename))
+      FileUtils.cp(src, dst_path)
       @copied = true
 
       # Update the location
       uri = URI::Generic.build({
           scheme: 'file',
           host: 'localhost',
-          path: Addressable::URI.escape(File.absolute_path(dst_filename))
+          path: Addressable::URI.escape(File.absolute_path(dst_path))
           })
       @location = uri.to_s
+      @path = dst_path
     end
 
     private

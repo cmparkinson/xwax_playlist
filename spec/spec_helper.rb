@@ -1,5 +1,13 @@
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
 RSpec.configure do |config|
+  config.order = :random
+  Kernel.srand config.seed
+
+  config.expect_with :rspec do |expectations|
+    expectations.syntax = :expect
+  end
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

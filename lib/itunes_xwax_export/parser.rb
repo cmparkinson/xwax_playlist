@@ -2,9 +2,11 @@ module XwaxExport
   class Parser
     attr_accessor :tracks, :playlists
 
-    def initialize(xml_file)
-      plist = Plist::parse_xml(xml_file)
+    def self.from_xml(xml_file)
+      new(Plist::parse_xml(xml_file))
+    end
 
+    def initialize(plist)
       @tracks = Track.load_from_plist(plist['Tracks'])
       @playlists = Playlist.load_from_plist(plist['Playlists'])
     end
