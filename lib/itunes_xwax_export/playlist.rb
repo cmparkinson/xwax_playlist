@@ -16,14 +16,14 @@ module XwaxExport
     ]
 
     def self.load_from_plist(plist)
-      lists = []
+      lists = {}
 
       plist.each do |plist_entry|
         name = plist_entry['Name']
         next if IGNORED.include?(name)
 
         playlist = new(name)
-        lists << playlist
+        lists[name] = playlist
 
         if plist_entry['Playlist Items']
           plist_entry['Playlist Items'].each { |t| playlist << Track.get_by_id(t['Track ID']) }

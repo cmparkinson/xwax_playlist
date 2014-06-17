@@ -1,6 +1,7 @@
 describe 'Library' do
   before(:all) do
     @plist = update_path(File.join('spec', 'itunes', 'iTunes Library.xml'))
+    @parser = XwaxExport::Parser.new(@plist)
   end
 
   describe 'Track' do
@@ -31,6 +32,31 @@ describe 'Library' do
 
       it 'evaluates to the correct pattern' do
         expect(subject.evaluate_pattern(pattern)).to eq(correct)
+      end
+    end
+  end
+
+  describe 'Playlist' do
+    let(:playlists) { XwaxExport::Playlist.load_from_plist(@plist['Playlists']) }
+
+    describe 'Empty playlist' do
+      it 'contains no tracks' do
+        expect(playlists['Empty Playlist'].tracks.size).to eq(0)
+      end
+    end
+
+    describe 'Test playlist' do
+      it 'contains one track' do
+        expect(playlists['Test Playlist'].tracks.size).to eq(1)
+      end
+    end
+  end
+
+  describe 'Genre playlist' do
+    subject { @parser.build_genre_playlists['Progressive House'] }
+    describe 'Progressive house' do
+      it 'contains one track' do
+        expect(subject.tracks.size).to eq(1)
       end
     end
   end

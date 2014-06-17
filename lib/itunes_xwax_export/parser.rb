@@ -11,7 +11,7 @@ module XwaxExport
       @playlists = Playlist.load_from_plist(plist['Playlists'])
     end
 
-    def build_genre_playlists(ignored)
+    def build_genre_playlists(ignored = [])
       playlists = {}
 
       @tracks.each do |t|
