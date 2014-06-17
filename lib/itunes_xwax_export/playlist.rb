@@ -1,5 +1,7 @@
 module XwaxExport
   class Playlist
+    attr_accessor :tracks
+
     IGNORED = [
         'Library',
         'Music',
@@ -21,7 +23,7 @@ module XwaxExport
         next if IGNORED.include?(name)
 
         playlist = new(name)
-        @playlists << playlist
+        lists << playlist
 
         if plist_entry['Playlist Items']
           plist_entry['Playlist Items'].each { |t| playlist << Track.get_by_id(t['Track ID']) }
@@ -38,6 +40,14 @@ module XwaxExport
 
     def <<(track)
       @tracks << track
+    end
+
+    def write(dir, min_rating)
+      File.open(File.join(dir, "#{@name}.playlist"), 'w') do |f|
+        @tracks.each do |track|
+          f.puts("#{track.location}\t#{track.artist}\t#{track.title}") if track.rating >= min_rating
+        end
+      end
     end
   end
 end
