@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'ruby-debug-ide'
 
   spec.add_dependency 'plist', '~> 3.1'
+  spec.add_dependency 'addressable', '~> 2.3.6'
 end

@@ -5,6 +5,7 @@ require 'optparse'
 require 'ostruct'
 require 'fileutils'
 require 'uri'
+require 'addressable/uri'
 
 require 'itunes_xwax_export/playlist'
 require 'itunes_xwax_export/track'

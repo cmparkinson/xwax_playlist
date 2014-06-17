@@ -23,7 +23,7 @@ module XwaxExport
       @year = properties['Year']
       @comments = properties['Comments']
       @location = properties['Location']
-      @path = URI.unescape(URI(@location).path)
+      @path = Addressable::URI.unescape(URI(@location).path)
 
       @copied = false
 
@@ -38,7 +38,7 @@ module XwaxExport
       # Don't copy the file more than once.
       return false if @copied
 
-      src = URI.unescape(URI(@location).path)
+      src = Addressable::URI.unescape(URI(@location).path)
       dst_filename = pattern && evaluate_pattern(pattern) || File.basename(src)
 
       FileUtils.cp(src, File.join(dst_dir, dst_filename))
@@ -48,7 +48,7 @@ module XwaxExport
       uri = URI::Generic.build({
           scheme: 'file',
           host: 'localhost',
-          path: URI.escape(File.absolute_path(dst_filename))
+          path: Addressable::URI.escape(File.absolute_path(dst_filename))
           })
       @location = uri.to_s
     end
