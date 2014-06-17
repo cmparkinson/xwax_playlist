@@ -37,7 +37,8 @@ module XwaxExport
           options.playlist_dir = dir
         end
 
-        o.on('-r', '--rating RATING', 'Only include files with a rating of RATING or higher (0-5)') do |rating|
+        o.on('-r', '--rating RATING', OptionParser::OctalInteger,
+            'Only include files with a rating of RATING or higher (0-5)') do |rating|
           options.min_rating = rating
         end
 
@@ -53,7 +54,7 @@ module XwaxExport
       options.file = args[0]
       unless options.file and File.exist?(options.file)
         puts opts
-        exit 1
+        return false
       end
 
       options
