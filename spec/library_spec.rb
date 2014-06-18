@@ -2,15 +2,20 @@ describe 'Library' do
   before(:all) do
     @plist = update_path(File.join('spec', 'itunes', 'iTunes Library.xml'))
     @parser = XwaxExport::Parser.new(@plist)
+    @tmp_dir = Dir.mktmpdir
+  end
+
+  after(:all) do
+    FileUtils.remove_entry(@tmp_dir)
   end
 
   describe 'Track' do
     subject(:track) { XwaxExport::Track.new(@plist['Tracks'].first[1]) }
 
     describe '#copy' do
-      let(:bad_dir) { '/tmp/invalid_directory' }
-      let(:good_dir) { '/tmp/' }
-      let(:dst_filename) { File.join(good_dir, File.basename(subject.path)) }
+      let(:bad_dir) { 'invalid_directory_name' }
+      let(:good_dir) { @tmp_dir }
+      let(:dst_filename) { File.join(@tmp_dir, File.basename(subject.path)) }
       let(:dst_uri) { URI::Generic.build({scheme: 'file', host: 'localhost', path: Addressable::URI.escape(dst_filename)}) }
 
       it 'fails if the directory doesn\'t exist' do

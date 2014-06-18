@@ -3,6 +3,7 @@ $:.unshift(File.expand_path(__dir__))
 require 'plist'
 require 'optparse'
 require 'fileutils'
+require 'tmpdir'
 require 'uri'
 require 'addressable/uri'
 
