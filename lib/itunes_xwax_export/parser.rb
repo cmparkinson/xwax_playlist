@@ -11,6 +11,10 @@ module XwaxExport
       @playlists = Playlist.load_from_plist(plist['Playlists'])
     end
 
+    def intersect_playlists(included)
+      @playlists &= included
+    end
+
     def create_genre_playlists(ignored = [])
       @tracks.each do |t|
         next if ignored.include?(t.genre)

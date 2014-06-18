@@ -13,6 +13,7 @@ module XwaxExport
     end
 
     attr_accessor :id, :name, :artist, :genre, :location, :path, :rating, :year
+    alias_method :title, :name
 
     def initialize(properties)
       @id = properties['Track ID']

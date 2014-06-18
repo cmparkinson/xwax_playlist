@@ -45,12 +45,23 @@ module XwaxExport
       @tracks << track
     end
 
-    def write(dir, min_rating = 0)
+    def prune_by_rating(rating)
+      @tracks.delete_if { |t| t.rating < rating}
+    end
+
+    def write(dir)
+      # Don't write empty playlists
+      return false if @tracks.size == 0
+
+      track_count = 0
       File.open(File.join(dir, @name), 'w') do |f|
         @tracks.each do |track|
-          f.puts("#{track.location}\t#{track.artist}\t#{track.title}") if track.min_rating >= min_rating
+          track_count += 1
+          f.puts("#{track.location}\t#{track.artist}\t#{track.title}")
         end
       end
+
+      track_count
     end
   end
 end
