@@ -26,7 +26,10 @@ module XwaxExport
         lists[name] = playlist
 
         if plist_entry['Playlist Items']
-          plist_entry['Playlist Items'].each { |t| playlist << Track.get_by_id(t['Track ID']) }
+          plist_entry['Playlist Items'].each do |t|
+            track = Track.get_by_id(t['Track ID'])
+            playlist << track if track
+          end
         end
       end
 
@@ -42,10 +45,10 @@ module XwaxExport
       @tracks << track
     end
 
-    def write(dir, min_rating)
-      File.open(File.join(dir, "#{@name}.playlist"), 'w') do |f|
+    def write(dir, min_rating = 0)
+      File.open(File.join(dir, @name), 'w') do |f|
         @tracks.each do |track|
-          f.puts("#{track.location}\t#{track.artist}\t#{track.title}") if track.rating >= min_rating
+          f.puts("#{track.location}\t#{track.artist}\t#{track.title}") if track.min_rating >= min_rating
         end
       end
     end

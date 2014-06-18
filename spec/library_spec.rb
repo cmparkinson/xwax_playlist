@@ -53,7 +53,7 @@ describe 'Library' do
   end
 
   describe 'Genre playlist' do
-    subject { @parser.build_genre_playlists['Progressive House'] }
+    subject { @parser.create_genre_playlists['Progressive House'] }
     describe 'Progressive house' do
       it 'contains one track' do
         expect(subject.tracks.size).to eq(1)
