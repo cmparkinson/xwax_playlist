@@ -14,20 +14,38 @@ describe 'Library' do
 
     describe '#copy' do
       let(:bad_dir) { 'invalid_directory_name' }
-      let(:good_dir) { @tmp_dir }
+      let(:tmp_dir) { @tmp_dir }
       let(:dst_filename) { File.join(@tmp_dir, File.basename(subject.path)) }
       let(:dst_uri) { URI::Generic.build({scheme: 'file', host: 'localhost', path: Addressable::URI.escape(dst_filename)}) }
 
-      it 'fails if the directory doesn\'t exist' do
+      it 'will fail if the directory doesn\'t exist' do
         expect { subject.copy(bad_dir) }.to raise_error
       end
 
-      it 'succeeds otherwise' do
-        subject.copy(good_dir)
+      it 'will succeed if the directory exists' do
+        subject.copy(tmp_dir)
         expect(File.exist?(dst_filename)).to eq(true)
         expect(subject.location).to eq(dst_uri.to_s)
         expect(subject.path).to eq(dst_filename)
         FileUtils.rm dst_filename
+      end
+
+      it 'will rename the file if there is a conflict' do
+        FILENAME = 'Test.mp3'
+
+        ext = File.extname(FILENAME)
+        name = File.basename(FILENAME, ext)
+        renamed = File.join(tmp_dir, "#{name}_1.#{ext}")
+
+        path = File.join(tmp_dir, FILENAME)
+
+        FileUtils.touch(path)
+
+        subject.copy(tmp_dir, FILENAME)
+        expect(File.exist?(renamed)).to eq(true)
+
+        FileUtils.rm path
+        FileUtils.rm renamed
       end
     end
 

@@ -43,6 +43,25 @@ module XwaxExport
       dst_filename = pattern && evaluate_pattern(pattern) || File.basename(src)
       dst_path = File.join(dst_dir, dst_filename)
 
+      # If the destination file exists, append _1, _2, etc until we get a unique filename
+      if File.exist?(dst_path)
+        ext = File.extname(dst_filename)
+        base = File.basename(dst_filename, ext)
+
+        count = 1
+        loop do
+          rename = "#{base}_#{count}.#{ext}"
+          rename_path = File.join(dst_dir, rename)
+
+          unless File.exist?(rename_path)
+            dst_path = rename_path
+            break
+          end
+
+          count += 1
+        end
+      end
+
       FileUtils.cp(src, dst_path)
       @copied = true
 
