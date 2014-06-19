@@ -50,7 +50,7 @@ module XwaxExport
 
         count = 1
         loop do
-          rename = "#{base}_#{count}.#{ext}"
+          rename = "#{base}_#{count}#{ext}"
           rename_path = File.join(dst_dir, rename)
 
           unless File.exist?(rename_path)

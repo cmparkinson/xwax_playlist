@@ -3,11 +3,12 @@ module XwaxExport
     attr_accessor :tracks
 
     IGNORED = [
+        'Genius',
         'Library',
         'Music',
         'Movies',
         'TV Shows',
-        '90\’s Music',
+        '90’s Music',
         'Classical Music',
         'My Top Rated',
         'Recently Added',
@@ -46,7 +47,7 @@ module XwaxExport
     end
 
     def prune_by_rating(rating)
-      @tracks.delete_if { |t| t.rating < rating}
+      @tracks.delete_if { |t| t.rating < rating }
     end
 
     def write(dir)
@@ -57,7 +58,7 @@ module XwaxExport
       File.open(File.join(dir, @name), 'w') do |f|
         @tracks.each do |track|
           track_count += 1
-          f.puts("#{track.location}\t#{track.artist}\t#{track.title}")
+          f.puts("#{track.path}\t#{track.artist}\t#{track.title}")
         end
       end
 

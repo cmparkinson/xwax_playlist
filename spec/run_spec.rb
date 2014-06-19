@@ -53,6 +53,16 @@ describe 'Run' do
       expect(File.exist?(File.join(@tmp_dir, TEST_PLAYLIST))).to eq(false)
     end
 
+    it 'will copy tracks using the specified naming pattern' do
+      pattern = '%{artist} - %{title}.mp3'
+      filename = 'Empty Artist - Empty Song.mp3'
+
+      options[:copy_dir] = @tmp_dir
+      options[:copy_pattern] = pattern
+      XwaxExport.execute(options, update_path(options[:file]))
+      expect(File.exist?(File.join(@tmp_dir, filename))).to eq(true)
+    end
+
     after(:each) do
       FileUtils.rm_rf("#{@tmp_dir}/.", secure: true)
     end

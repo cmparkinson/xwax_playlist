@@ -31,17 +31,17 @@ describe 'Library' do
       end
 
       it 'will rename the file if there is a conflict' do
-        FILENAME = 'Test.mp3'
+        filename = 'Empty Song.mp3'
 
-        ext = File.extname(FILENAME)
-        name = File.basename(FILENAME, ext)
-        renamed = File.join(tmp_dir, "#{name}_1.#{ext}")
+        ext = File.extname(filename)
+        name = File.basename(filename, ext)
+        renamed = File.join(tmp_dir, "#{name}_1#{ext}")
 
-        path = File.join(tmp_dir, FILENAME)
+        path = File.join(tmp_dir, filename)
 
         FileUtils.touch(path)
 
-        subject.copy(tmp_dir, FILENAME)
+        subject.copy(tmp_dir, '%{title}.mp3')
         expect(File.exist?(renamed)).to eq(true)
 
         FileUtils.rm path
