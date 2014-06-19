@@ -1,5 +1,7 @@
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
+require 'itunes_xwax_export'
+
 RSpec.configure do |config|
   config.order = :random
   Kernel.srand config.seed
