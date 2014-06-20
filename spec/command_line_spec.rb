@@ -15,6 +15,7 @@ describe 'CommandLineParser' do
   let(:playlist_dir) { [ '-p', '/tmp', __FILE__ ] }
   let(:min_rating) { [ '-r', '5', __FILE__ ] }
   let(:bad_min_rating) { [ '-r', 'S', __FILE__] }
+  let(:stdout) { [ '-o', __FILE__ ] }
 
   it 'fails with no file' do
     options = XwaxPlaylist::CommandLineParser.parse(empty)
@@ -68,5 +69,10 @@ describe 'CommandLineParser' do
 
   it 'fails with a non-integer passed to the min rating switch' do
     expect{XwaxPlaylist::CommandLineParser.parse(bad_min_rating.clone)}.to raise_error(OptionParser::InvalidArgument)
+  end
+
+  it 'captures the stdout switch' do
+    options = XwaxPlaylist::CommandLineParser.parse(stdout)
+    expect(options[:stdout]).to eq(true)
   end
 end

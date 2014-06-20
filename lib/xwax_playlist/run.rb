@@ -25,7 +25,12 @@ module XwaxPlaylist
     def write
       @parser.playlists.each do |name, p|
         p.tracks.each { |t| t.copy(@options[:copy_dir], @options[:copy_pattern]) } if @options[:copy_dir]
-        p.write(@options[:playlist_dir])
+
+        if @options[:stdout]
+          p.write($stdout)
+        else
+          p.write_to_file(@options[:playlist_dir])
+        end
       end
     end
   end

@@ -15,7 +15,8 @@ describe 'Run' do
         min_rating: 0,
         playlists: [],
         create_genre_playlists: true,
-        ignored_genres: []
+        ignored_genres: [],
+        stdout: false
     }
   end
 
@@ -61,6 +62,26 @@ describe 'Run' do
       options[:copy_pattern] = pattern
       XwaxPlaylist.execute(options, update_path(options[:file]))
       expect(File.exist?(File.join(@tmp_dir, filename))).to eq(true)
+    end
+
+    it 'will write to stdout when passed the -o switch' do
+      playlist_name = 'Test Playlist'
+
+      file_path = File.join(__dir__, 'itunes', 'iTunes Media', 'Music', 'Empty Artist', 'Unknown Album', 'Empty Song.mp3')
+      expected_line = "#{file_path}\tEmpty Artist\tEmpty Song\n"
+      options[:stdout] = true
+      options[:playlists] << playlist_name
+
+      begin
+        out = $stdout
+        buffer = StringIO.new
+        $stdout = buffer
+
+        XwaxPlaylist.execute(options, update_path(options[:file]))
+        expect(buffer.string).to eq(expected_line)
+      ensure
+        $stdout = out
+      end
     end
 
     after(:each) do

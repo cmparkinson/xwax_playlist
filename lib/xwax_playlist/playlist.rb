@@ -50,16 +50,26 @@ module XwaxPlaylist
       @tracks.delete_if { |t| t.rating < rating }
     end
 
-    def write(dir)
+    def write_to_file(dir)
+      # Don't write empty playlists
+      return false if @tracks.size == 0
+
+      tracks = 0
+      File.open(File.join(dir, @name), 'w') do |f|
+        tracks = write(f)
+      end
+
+      tracks
+    end
+
+    def write(io)
       # Don't write empty playlists
       return false if @tracks.size == 0
 
       track_count = 0
-      File.open(File.join(dir, @name), 'w') do |f|
-        @tracks.each do |track|
-          track_count += 1
-          f.puts("#{track.path}\t#{track.artist}\t#{track.title}")
-        end
+      @tracks.each do |track|
+        track_count += 1
+        io.puts("#{track.path}\t#{track.artist}\t#{track.title}")
       end
 
       track_count
