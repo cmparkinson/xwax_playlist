@@ -10,9 +10,10 @@ module XwaxPlaylist
     end
 
     def parse_options
+      @parser.create_genre_playlists(@options[:ignored_genres]) if @options[:create_genre_playlists]
+
       # If we've been passed a list of playlists, exclude the others
       @parser.intersect_playlists(@options[:playlists]) if @options[:playlists].size > 0
-      @parser.create_genre_playlists(@options[:ignored_genres]) if @options[:create_genre_playlists]
 
       if @options[:min_rating] > 0
         @parser.playlists.each do |name, p|
@@ -24,7 +25,12 @@ module XwaxPlaylist
     def write
       @parser.playlists.each do |name, p|
         p.tracks.each { |t| t.copy(@options[:copy_dir], @options[:copy_pattern]) } if @options[:copy_dir]
-        p.write(@options[:playlist_dir])
+
+        if @options[:stdout]
+          p.write($stdout)
+        else
+          p.write_to_file(@options[:playlist_dir])
+        end
       end
     end
   end

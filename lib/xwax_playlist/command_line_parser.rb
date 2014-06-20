@@ -6,7 +6,8 @@ module XwaxPlaylist
           playlists: [],
           create_genre_playlists: true,
           playlist_dir: ENV['PWD'],
-          min_rating: 0
+          min_rating: 0,
+          stdout: false
       }
 
       # TODO Add a music directory option to allow XML parsing from a different filesystem (ie an HFS filesystem shared between OSX and Linux)
@@ -31,6 +32,10 @@ module XwaxPlaylist
 
         o.on('-I', '--ignore-genre GENRE', 'Ignore GENRE when creating genre specific playlists') do |genre|
           options[:ignored_genres] << genre
+        end
+
+        o.on('-o', '--stdout', 'Write playlists to STDOUT instead of files') do
+          options[:stdout] = true
         end
 
         o.on('-p', '--playlist DIR', 'Create playlist files in DIR') do |dir|
