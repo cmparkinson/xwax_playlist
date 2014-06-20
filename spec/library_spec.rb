@@ -1,7 +1,7 @@
 describe 'Library' do
   before(:all) do
     @plist = update_path(File.join('spec', 'itunes', 'iTunes Library.xml'))
-    @parser = XwaxExport::Parser.new(@plist)
+    @parser = XwaxPlaylist::Parser.new(@plist)
     @tmp_dir = Dir.mktmpdir
   end
 
@@ -10,7 +10,7 @@ describe 'Library' do
   end
 
   describe 'Track' do
-    subject(:track) { XwaxExport::Track.new(@plist['Tracks'].first[1]) }
+    subject(:track) { XwaxPlaylist::Track.new(@plist['Tracks'].first[1]) }
 
     describe '#copy' do
       let(:bad_dir) { 'invalid_directory_name' }
@@ -60,7 +60,7 @@ describe 'Library' do
   end
 
   describe 'Playlist' do
-    let(:playlists) { XwaxExport::Playlist.load_from_plist(@plist['Playlists']) }
+    let(:playlists) { XwaxPlaylist::Playlist.load_from_plist(@plist['Playlists']) }
 
     describe 'Empty playlist' do
       it 'contains no tracks' do
@@ -76,7 +76,7 @@ describe 'Library' do
   end
 
   describe 'Parser' do
-    let(:parser) { XwaxExport::Parser.new(@plist) }
+    let(:parser) { XwaxPlaylist::Parser.new(@plist) }
 
     it 'will intersect the playlist hash with an array of playlist names' do
       playlist_name = 'Test Playlist'

@@ -1,7 +1,7 @@
 # coding: utf-8
 
 Gem::Specification.new do |spec|
-  spec.name          = 'itunes_xwax_export'
+  spec.name          = 'xwax_playlist'
   spec.version       = '0.1.0'
   spec.authors       = ['Christian Parkinson']
   spec.email         = ['chris@parkie.ca']

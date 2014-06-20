@@ -1,6 +1,6 @@
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
-require 'itunes_xwax_export'
+require 'xwax_playlist'
 
 RSpec.configure do |config|
   config.order = :random

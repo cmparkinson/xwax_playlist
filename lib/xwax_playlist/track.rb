@@ -1,4 +1,4 @@
-module XwaxExport
+module XwaxPlaylist
   class Track
     @@id_map = {}
 

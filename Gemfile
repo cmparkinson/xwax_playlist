@@ -1,4 +1,4 @@
 source 'http://rubygems.org'
 
-# Specify your gem's dependencies in itunes_xwax_export.gemspec
+# Specify your gem's dependencies in xwax_playlist.gemspec
 gemspec

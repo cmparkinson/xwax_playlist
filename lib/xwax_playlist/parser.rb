@@ -1,4 +1,4 @@
-module XwaxExport
+module XwaxPlaylist
   class Parser
     attr_accessor :tracks, :playlists
 

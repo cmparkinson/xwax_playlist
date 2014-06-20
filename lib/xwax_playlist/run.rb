@@ -1,4 +1,4 @@
-module XwaxExport
+module XwaxPlaylist
   class Run
     def initialize(options, xml = nil)
       @options = options
