@@ -12,7 +12,7 @@ module XwaxPlaylist
 
       # TODO Add a music directory option to allow XML parsing from a different filesystem (ie an HFS filesystem shared between OSX and Linux)
       opts = OptionParser.new do |o|
-        o.banner = "Usage: #{$0} [options] file"
+        o.banner = "Usage: #{File.basename($0)} [options] file"
 
         o.on('-c', '--copy DIR', 'Copy matching files to DIR') do |dir|
           options[:copy_dir] = dir
