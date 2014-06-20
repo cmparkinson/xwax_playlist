@@ -15,11 +15,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.6'
-  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rake', '~> 0'
   spec.add_development_dependency 'rspec', '~> 2.14'
-  spec.add_development_dependency 'debase'
-  spec.add_development_dependency 'ruby-debug-ide'
+  spec.add_development_dependency 'debase', '~> 0'
+  spec.add_development_dependency 'ruby-debug-ide', '~> 0'
 
   spec.add_dependency 'plist', '~> 3.1'
-  spec.add_dependency 'addressable', '~> 2.3.6'
+  spec.add_dependency 'addressable', '~> 2.3'
 end
