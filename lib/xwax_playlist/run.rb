@@ -10,9 +10,10 @@ module XwaxPlaylist
     end
 
     def parse_options
+      @parser.create_genre_playlists(@options[:ignored_genres]) if @options[:create_genre_playlists]
+
       # If we've been passed a list of playlists, exclude the others
       @parser.intersect_playlists(@options[:playlists]) if @options[:playlists].size > 0
-      @parser.create_genre_playlists(@options[:ignored_genres]) if @options[:create_genre_playlists]
 
       if @options[:min_rating] > 0
         @parser.playlists.each do |name, p|
