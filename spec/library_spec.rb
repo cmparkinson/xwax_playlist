@@ -75,6 +75,16 @@ describe 'Library' do
     end
   end
 
+  describe 'Parser' do
+    let(:parser) { XwaxExport::Parser.new(@plist) }
+
+    it 'will intersect the playlist hash with an array of playlist names' do
+      playlist_name = 'Test Playlist'
+      playlist = @parser.playlists[playlist_name]
+      expect(@parser.intersect_playlists([playlist_name]).values).to eq([playlist])
+    end
+  end
+
   describe 'Genre playlist' do
     subject { @parser.create_genre_playlists['Progressive House'] }
     describe 'Progressive house' do

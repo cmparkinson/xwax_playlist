@@ -12,7 +12,8 @@ module XwaxExport
     end
 
     def intersect_playlists(included)
-      @playlists &= included
+      (@playlists.keys - included).each { |k| @playlists.delete(k) }
+      @playlists
     end
 
     def create_genre_playlists(ignored = [])
