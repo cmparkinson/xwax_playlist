@@ -5,8 +5,8 @@ Gem::Specification.new do |spec|
   spec.version       = '0.1.0'
   spec.authors       = ['Christian Parkinson']
   spec.email         = ['chris@parkie.ca']
-  spec.summary       = %q{A small utility to parse the iTunes Library XML file and export xwax compatible playlists.}
-  spec.homepage      = ''
+  spec.summary       = %q{A small utility to parse an iTunes Library XML file and export xwax compatible playlists.}
+  spec.homepage      = 'http://github.com/cmparkinson/xwax_playlist'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
