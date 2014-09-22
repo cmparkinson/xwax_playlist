@@ -1,29 +1,10 @@
-# ItunesXwaxExport
+# xwax_playlist
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'itunes_xwax_export'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install itunes_xwax_export
+This is a small, stand-alone application to convert iTunes Library XML files into playlists suitable for reading by [xwax](http://xwax.org/).
 
 ## Usage
+Run itunes2xwax -h for usage details.
 
-TODO: Write usage instructions here
+## License
 
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/itunes_xwax_export/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+This project is licensed by under the terms of the MIT license.  See LICENSE.txt for details.
